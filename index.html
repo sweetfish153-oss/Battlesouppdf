@@ -42,7 +42,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative; /* Anchor untuk Treaty box di sudut */
         }
 
         h1 {
@@ -127,44 +126,6 @@
             font-weight: 600;
         }
 
-        /* Kotak Treaty - Di pojok kanan bawah halaman A4 */
-        .treaty-box {
-            position: absolute;
-            bottom: 30px;
-            right: 35px;
-            
-            /* Desain Kotak Dashed membungkus semua */
-            border: 2px dashed #333;
-            padding: 15px 25px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-        }
-
-        .treaty-cutout {
-            font-size: 20px;
-            font-family: 'Sekuya', 'Impact', sans-serif;
-            letter-spacing: 2px;
-            margin-bottom: 2px;
-        }
-
-        .treaty-arrows {
-            color: coral; /* Warna Coral */
-            font-size: 48px; /* Panah Jauh Lebih Besar */
-            font-weight: bold;
-            letter-spacing: 15px;
-            line-height: 1;
-            margin-bottom: 5px;
-            white-space: nowrap; /* Memaksa agar tetap 1 baris */
-        }
-
-        .treaty-note {
-            font-size: 13px;
-            font-weight: 600;
-        }
-
         /* Tombol Print (Sembunyi saat cetak) */
         .print-btn {
             position: fixed;
@@ -233,13 +194,6 @@
                 <div class="col-labels" id="my-col-labels"></div>
             </div>
         </div>
-    </div>
-
-    <!-- Kotak Treaty di kanan bawah kertas -->
-    <div class="treaty-box">
-        <div class="treaty-cutout">TREATY</div>
-        <div class="treaty-arrows">&larr; &nbsp; &rarr;</div>
-        <div class="treaty-note">(Circle one)</div>
     </div>
 
 </div>
