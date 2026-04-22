@@ -44,7 +44,7 @@
             color: #111;
             /* Ukuran presisi A4 */
             width: 210mm;
-            height: 297mm;
+            min-height: 297mm;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -59,6 +59,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
         }
 
         h1 {
@@ -77,7 +78,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
         }
 
         .board-title {
@@ -196,31 +197,43 @@
             grid-template-rows: repeat(2, 32px);
         }
 
-        /* Area Treaty di Kanan Bawah */
-        .treaty-wrapper {
-            margin-top: auto; /* Mendorong box ini ke posisi paling bawah yang tersisa */
-            align-self: flex-end; /* Memposisikan box di sebelah kanan */
+        /* Area Treaty di Kanan Chicken */
+        .chicken-container {
+            position: relative; /* Menjadi anchor untuk absolute positioning kotak treaty */
+        }
+
+        .treaty-box {
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            margin-left: 45px; /* Jarak antara Chicken dan kotak Treaty */
+            
+            /* Desain Kotak Dashed */
+            border: 2px dashed #000;
+            padding: 12px 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-right: 20px;
-            margin-bottom: 20px;
+            justify-content: center;
+            min-width: 140px;
+            border-radius: 4px;
         }
 
         .treaty-cutout {
-            border: 2px dashed #000;
-            padding: 10px 25px;
-            font-size: 16px;
-            font-family: 'Sekuya', 'Impact', sans-serif; /* Menggunakan gaya title */
+            font-size: 18px;
+            font-family: 'Sekuya', 'Impact', sans-serif;
             letter-spacing: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .treaty-arrows {
-            font-size: 24px;
+            color: coral; /* Warna Coral */
+            font-size: 38px; /* Panah Lebih Besar */
             font-weight: bold;
-            letter-spacing: 15px;
-            margin-bottom: 2px;
+            letter-spacing: 10px;
+            line-height: 1;
+            margin-bottom: 5px;
         }
 
         .treaty-note {
@@ -228,9 +241,41 @@
             font-weight: 600;
         }
 
+        /* Tombol Print (Sembunyi saat cetak) */
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #2c3e50;
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-family: inherit;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: background 0.2s;
+            z-index: 1000;
+        }
+
+        .print-btn:hover {
+            background-color: #1a252f;
+        }
+
+        @media print {
+            .print-btn {
+                display: none !important;
+            }
+        }
+
     </style>
 </head>
 <body>
+
+<!-- Tombol Print PDF -->
+<button class="print-btn" onclick="window.print()">🖨️ Print to PDF</button>
 
 <div class="container">
     <h1>BATTLESOUP</h1>
@@ -346,22 +391,23 @@
                     </div>
                     <div class="item-label">Shrimp</div>
                 </div>
-                <!-- Chicken -->
-                <div class="legend-item">
+                
+                <!-- Chicken + TREATY Box -->
+                <div class="legend-item chicken-container">
                     <div class="shape chicken-shape">
                         <div class="s-box">🍗</div><div class="s-box">🍗</div>
                     </div>
                     <div class="item-label">Chicken</div>
+
+                    <!-- Kotak Treaty di kanan Chicken (Bawah) -->
+                    <div class="treaty-box">
+                        <div class="treaty-cutout">TREATY</div>
+                        <div class="treaty-arrows">&larr; &nbsp; &rarr;</div>
+                        <div class="treaty-note">(Circle one)</div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- TREATY Section di Kanan Bawah -->
-    <div class="treaty-wrapper">
-        <div class="treaty-cutout">TREATY</div>
-        <div class="treaty-arrows">← &nbsp; →</div>
-        <div class="treaty-note">(Circle one)</div>
     </div>
 
 </div>
