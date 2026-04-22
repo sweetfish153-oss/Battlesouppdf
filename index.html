@@ -5,10 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Battlesoup Game</title>
     <style>
-        /* Mengatur font ke Google Sans (fallback ke font sans-serif lain jika tidak ada di lokal) */
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+        /* Import Google Sans (Product Sans) dari CDN eksternal agar berfungsi di GitHub */
+        @import url('https://fonts.cdnfonts.com/css/product-sans');
         
-        /* Setup Print untuk A4 */
+        /* 
+         * PENTING UNTUK FONT SEKUYA:
+         * Jika font Sekuya adalah file custom (.ttf / .woff), upload ke repo GitHub, 
+         * lalu hapus tanda komentar (/* ... */) pada blok @font-face di bawah ini 
+         * dan sesuaikan nama file-nya.
+         */
+        
+        /*
+        @font-face {
+            font-family: 'Sekuya';
+            src: url('sekuya.woff2') format('woff2'),
+                 url('sekuya.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        */
+
+        /* Setup Print untuk ukuran kertas A4 */
         @page {
             size: A4;
             margin: 0;
@@ -19,7 +36,8 @@
         }
 
         body {
-            font-family: 'Google Sans', 'Open Sans', Arial, sans-serif;
+            /* Menggunakan Google Sans sebagai default seluruh teks */
+            font-family: 'Product Sans', 'Google Sans', Arial, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #fff;
@@ -44,7 +62,8 @@
         }
 
         h1 {
-            font-family: 'Sekuya', 'Impact', sans-serif; /* Sekuya dengan fallback bold font */
+            /* Menggunakan font Sekuya khusus untuk Judul utama */
+            font-family: 'Sekuya', 'Impact', sans-serif; 
             font-size: 38px;
             font-weight: normal;
             letter-spacing: 2px;
@@ -131,7 +150,7 @@
         .legend {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
             padding-top: 5px;
         }
 
@@ -154,19 +173,9 @@
         }
 
         .item-label {
-            font-size: 12px;
-            margin-top: 6px;
+            font-size: 13px;
+            margin-top: 8px;
             font-weight: 600;
-        }
-
-        .item-code {
-            font-size: 11px;
-            color: #555;
-            border: 1px solid #ccc;
-            padding: 1px 6px;
-            margin-top: 2px;
-            border-radius: 3px;
-            letter-spacing: 1px;
         }
 
         /* Bentuk-bentuk Shape Custom */
@@ -187,6 +196,38 @@
             grid-template-rows: repeat(2, 32px);
         }
 
+        /* Area Treaty di Kanan Bawah */
+        .treaty-wrapper {
+            margin-top: auto; /* Mendorong box ini ke posisi paling bawah yang tersisa */
+            align-self: flex-end; /* Memposisikan box di sebelah kanan */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .treaty-cutout {
+            border: 2px dashed #000;
+            padding: 10px 25px;
+            font-size: 16px;
+            font-family: 'Sekuya', 'Impact', sans-serif; /* Menggunakan gaya title */
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        .treaty-arrows {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 15px;
+            margin-bottom: 2px;
+        }
+
+        .treaty-note {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
     </style>
 </head>
 <body>
@@ -196,7 +237,7 @@
 
     <!-- Papan Lawan -->
     <div class="board-section">
-        <div class="board-title">OPPONENT'S BATTLESOUP</div>
+        <div class="board-title">OPPONENT'S KITCHEN</div>
         <div class="board-layout">
             <div class="board-container">
                 <div class="grid-with-row-labels">
@@ -209,7 +250,7 @@
                 </div>
             </div>
 
-            <!-- Panel Legend/Kapal -->
+            <!-- Panel Legend Bahan Makanan -->
             <div class="legend">
                 <!-- Carrot -->
                 <div class="legend-item">
@@ -217,7 +258,6 @@
                         <div class="s-box">🥕</div><div class="s-box">🥕</div><div class="s-box">🥕</div><div class="s-box">🥕</div><div class="s-box">🥕</div>
                     </div>
                     <div class="item-label">Carrot</div>
-                    <div class="item-code">CCCCC</div>
                 </div>
                 <!-- Broccoli -->
                 <div class="legend-item">
@@ -228,7 +268,6 @@
                         <div class="s-box" style="grid-area: 2/2/3/3">🥦</div>
                     </div>
                     <div class="item-label">Broccoli</div>
-                    <div class="item-code">BBBB</div>
                 </div>
                 <!-- Peas -->
                 <div class="legend-item">
@@ -236,7 +275,6 @@
                         <div class="s-box">🫛</div><div class="s-box">🫛</div><div class="s-box">🫛</div>
                     </div>
                     <div class="item-label">Peas</div>
-                    <div class="item-code">PPP</div>
                 </div>
                 <!-- Shrimp -->
                 <div class="legend-item">
@@ -246,7 +284,6 @@
                         <div class="s-box" style="grid-area: 2/2/3/3">🍤</div>
                     </div>
                     <div class="item-label">Shrimp</div>
-                    <div class="item-code">SSS</div>
                 </div>
                 <!-- Chicken -->
                 <div class="legend-item">
@@ -254,7 +291,6 @@
                         <div class="s-box">🍗</div><div class="s-box">🍗</div>
                     </div>
                     <div class="item-label">Chicken</div>
-                    <div class="item-code">CC</div>
                 </div>
             </div>
         </div>
@@ -262,7 +298,7 @@
 
     <!-- Papan Saya -->
     <div class="board-section">
-        <div class="board-title">MY BATTLESOUP</div>
+        <div class="board-title">MY KITCHEN</div>
         <div class="board-layout">
             <div class="board-container">
                 <div class="grid-with-row-labels">
@@ -275,7 +311,7 @@
                 </div>
             </div>
 
-            <!-- Panel Legend/Kapal (Duplikat) -->
+            <!-- Panel Legend Bahan Makanan -->
             <div class="legend">
                 <!-- Carrot -->
                 <div class="legend-item">
@@ -283,7 +319,6 @@
                         <div class="s-box">🥕</div><div class="s-box">🥕</div><div class="s-box">🥕</div><div class="s-box">🥕</div><div class="s-box">🥕</div>
                     </div>
                     <div class="item-label">Carrot</div>
-                    <div class="item-code">CCCCC</div>
                 </div>
                 <!-- Broccoli -->
                 <div class="legend-item">
@@ -294,7 +329,6 @@
                         <div class="s-box" style="grid-area: 2/2/3/3">🥦</div>
                     </div>
                     <div class="item-label">Broccoli</div>
-                    <div class="item-code">BBBB</div>
                 </div>
                 <!-- Peas -->
                 <div class="legend-item">
@@ -302,7 +336,6 @@
                         <div class="s-box">🫛</div><div class="s-box">🫛</div><div class="s-box">🫛</div>
                     </div>
                     <div class="item-label">Peas</div>
-                    <div class="item-code">PPP</div>
                 </div>
                 <!-- Shrimp -->
                 <div class="legend-item">
@@ -312,7 +345,6 @@
                         <div class="s-box" style="grid-area: 2/2/3/3">🍤</div>
                     </div>
                     <div class="item-label">Shrimp</div>
-                    <div class="item-code">SSS</div>
                 </div>
                 <!-- Chicken -->
                 <div class="legend-item">
@@ -320,16 +352,21 @@
                         <div class="s-box">🍗</div><div class="s-box">🍗</div>
                     </div>
                     <div class="item-label">Chicken</div>
-                    <div class="item-code">CC</div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- TREATY Section di Kanan Bawah -->
+    <div class="treaty-wrapper">
+        <div class="treaty-cutout">TREATY</div>
+        <div class="treaty-arrows">← &nbsp; →</div>
+        <div class="treaty-note">(Circle one)</div>
+    </div>
+
 </div>
 
 <script>
-    // JS Script untuk merender 10x10 Grid (mencegah penulisan HTML div manual 100x2 kali)
     const rows =['A','B','C','D','E','F','G','H','I','J'];
     
     function generateBoard(boardPrefix) {
